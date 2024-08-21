@@ -60,3 +60,7 @@ button:hover {
 #response, #referral, #referralMessage {
     margin-top: 1rem;
 }
+
+.hidden {
+  display: none;
+}
