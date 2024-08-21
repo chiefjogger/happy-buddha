@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     submitWish.addEventListener('click', function() {
         const wish = wishInput.value;
         if (wish) {
-            response.textContent = "Tín hiệu từ vũ trụ: Bạn sẽ có" + wish;
+            response.textContent = "Tín hiệu từ vũ trụ: Bạn sẽ có " + wish;
             responseContainer.classList.remove('hidden');
             buddhaImage.classList.remove('hidden');
             newWishForm.classList.remove('hidden');
