@@ -1,13 +1,13 @@
 {
   "name": "buddha-wish-website",
   "version": "1.0.0",
-  "description": "Buddha wish-granting website",
+  "description": "A website for making wishes to the universe",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
-    "openai": "^4.0.0"
+    "@vercel/edge-config": "latest",
+    "openai": "^3.2.1"
   }
-  {
-  "dependencies": {
-    "@vercel/edge-config": "latest"
-  }
-}
 }
