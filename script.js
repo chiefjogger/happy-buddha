@@ -1,4 +1,4 @@
-const apiKey = 'YOUR_OPENAI_API_KEY';
+const apiKey = "YOUR_API_KEY_PLACEHOLDER";
 const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
 const wishForm = document.getElementById('wishForm');
