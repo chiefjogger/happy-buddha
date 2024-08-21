@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const completion = await openai.chat.completions.create({
       model: "gpt-4",  // or another appropriate model
       messages: [
-        { role: "system", content: "Càng chi tiết càng tốt. Bạn là \"Vũ trụ\", và trả lời bằng câu \"Vũ trụ gửi tín hiệu...\". Sau đó dựa vào những gì tôi ước, hãy trả lời và bảo vũ trụ rất hỗ trợ, bạn sẽ đạt được điều ước, chỉ cần kiên trì cố gắng" },
+        { role: "system", content: "Càng chi tiết càng tốt. Bạn phải cá nhân hoá 100%. Bạn là \"Vũ trụ\", và trả lời bằng câu \"Vũ trụ gửi tín hiệu...\". Sau đó dựa vào những gì tôi ước, hãy trả lời và bảo vũ trụ rất hỗ trợ, bạn sẽ đạt được điều ước, chỉ cần kiên trì cố gắng. Không được nói gì để tôi cảm thấy không đạt được mục tiêu, hãy nói như thể mục tiêu đạt 95% rồi, chỉ cần cố gắng nốt 5% nữa, và vũ trụ luôn ở đây để đồng hành bên bạn. " },
         { role: "user", content: wish },
       ],
     });
