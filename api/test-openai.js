@@ -1,9 +1,8 @@
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,13 +10,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: "Say something wise about Buddha in one sentence:",
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: "You are a helpful assistant." },
+        { role: "user", content: "Say something wise about Buddha in one sentence:" },
+      ],
       max_tokens: 50
     });
 
-    res.status(200).json({ result: completion.data.choices[0].text.trim() });
+    res.status(200).json({ result: completion.choices[0].message.content.trim() });
   } catch (error) {
     console.error('OpenAI API error:', error);
     res.status(500).json({ error: 'Error processing your request' });
