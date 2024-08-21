@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (!apiResponse.ok) {
-                throw new Error('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại');
+                const errorData = await apiResponse.json();
+                throw new Error(`API Error: ${errorData.error}. Details: ${errorData.details || 'No details provided'}`);
             }
 
             const data = await apiResponse.json();
@@ -33,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
             newWishForm.classList.remove('hidden');
             wishForm.classList.add('hidden');
         } catch (error) {
-            console.error('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại:', error);
-            alert('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại');
+            console.error('Error:', error.message);
+            alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
         }
     }
 });
