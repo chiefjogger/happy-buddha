@@ -36,7 +36,11 @@ async function handleWish() {
 }
 
 async function generateResponse(wish) {
-    const prompt = `Generate a positive and encouraging response to the following wish or prayer: "${wish}". The response should be motivational and suggest that the universe supports their goal.`;
+    const prompt = `As an enlightened and compassionate Buddha, provide a warm, encouraging, and personalized response to the following wish: "${userWish}". 
+Your response should be kind, wise, and offer subtle guidance or perspective. 
+Incorporate elements of Buddhist philosophy if relevant, but keep the language accessible. 
+Aim for a response length of about 2-3 sentences. 
+Begin with a greeting that references the wish, and end with a gentle word of encouragement.`;
 
     try {
         const response = await axios.post(apiUrl, {
