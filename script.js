@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
             buddhaImage.classList.remove('hidden');
             newWishForm.classList.remove('hidden');
             wishForm.classList.add('hidden');
+
+            // Log the wish
+            submitWish(wish);
         } catch (error) {
             console.error('Full error object:', error);
             console.error('Error message:', error.message);
@@ -74,3 +77,48 @@ async function testOpenAI() {
     alert('Error testing OpenAI. Check the console for details.');
   }
 }
+
+// Function to submit a wish
+function submitWish(wish) {
+    fetch('/api/logWish', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ wish }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Wish logged:', data);
+            fetchRecentWishes(); // Refresh the wishes list
+        })
+        .catch(error => console.error('Error logging wish:', error));
+}
+
+// Function to fetch and display recent wishes
+function fetchRecentWishes() {
+    fetch('/api/getWishes')
+        .then(response => response.json())
+        .then(wishes => {
+            const tableBody = document.querySelector('#wishesTable tbody');
+            tableBody.innerHTML = '';
+            wishes.forEach(wish => {
+                const row = `
+                    <tr>
+                        <td>${wish.wish}</td>
+                        <td>${new Date(wish.timestamp).toLocaleString('vi-VN')}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+            document.getElementById('recentWishes').classList.remove('hidden');
+        })
+        .catch(error => console.error('Error fetching wishes:', error));
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+
+    fetchRecentWishes();
+});
