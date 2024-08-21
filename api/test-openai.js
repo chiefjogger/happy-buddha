@@ -1,8 +1,6 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI();
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,12 +9,11 @@ export default async function handler(req, res) {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4o-mini",  // or "gpt-4-0613" if you want to use a specific version
       messages: [
         { role: "system", content: "You are a helpful assistant." },
         { role: "user", content: "Say something wise about Buddha in one sentence:" },
       ],
-      max_tokens: 50
     });
 
     res.status(200).json({ result: completion.choices[0].message.content.trim() });
