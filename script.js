@@ -36,7 +36,7 @@ async function handleWish() {
 }
 
 async function generateResponse(wish) {
-    const prompt = `As an enlightened and compassionate Buddha, provide a warm, encouraging, and personalized response to the following wish: "${userWish}". 
+    const prompt = `As an enlightened and compassionate Buddha, provide a warm, encouraging, and personalized response to the following wish: "${wish}". 
 Your response should be kind, wise, and offer subtle guidance or perspective. 
 Incorporate elements of Buddhist philosophy if relevant, but keep the language accessible. 
 Aim for a response length of about 2-3 sentences. 
@@ -79,3 +79,10 @@ function handleReferral() {
         referralBuddhaImage.classList.remove('hidden');
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    response.classList.add('hidden');
+    buddhaImage.classList.add('hidden');
+    referralMessage.classList.add('hidden');
+    referralBuddhaImage.classList.add('hidden');
+});
