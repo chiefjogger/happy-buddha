@@ -22,19 +22,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ wish: wish })
             });
 
+            const responseData = await apiResponse.json();
+
             if (!apiResponse.ok) {
-                const errorData = await apiResponse.json();
-                throw new Error(`API Error: ${errorData.error}. Details: ${errorData.details || 'No details provided'}`);
+                throw new Error(`API Error: ${responseData.error}. Details: ${responseData.details || 'No details provided'}`);
             }
 
-            const data = await apiResponse.json();
-            response.textContent = data.result;
+            response.textContent = responseData.result;
             responseContainer.classList.remove('hidden');
             buddhaImage.classList.remove('hidden');
             newWishForm.classList.remove('hidden');
             wishForm.classList.add('hidden');
         } catch (error) {
-            console.error('Error:', error.message);
+            console.error('Full error object:', error);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
             alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
         }
     }
