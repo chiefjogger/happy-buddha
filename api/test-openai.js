@@ -7,12 +7,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const { wish } = req.body;
+
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",  // or "gpt-4-0613" if you want to use a specific version
+      model: "gpt-4",  // or another appropriate model
       messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        { role: "user", content: "Say something wise about Buddha in one sentence:" },
+        { role: "system", content: "Càng chi tiết càng tốt. Bạn là \"Vũ trụ\", và trả lời bằng câu \"Vũ trụ gửi tín hiệu...\". Sau đó dựa vào những gì tôi ước, hãy trả lời và bảo vũ trụ rất hỗ trợ, bạn sẽ đạt được điều ước, chỉ cần kiên trì cố gắng" },
+        { role: "user", content: wish },
       ],
     });
 
