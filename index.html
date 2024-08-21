@@ -13,21 +13,23 @@
             <textarea id="wishInput" placeholder="Enter your wish or prayer here..."></textarea>
             <button id="submitWish">Send Wish</button>
         </div>
-        <div id="response" class="hidden">
-            <h2>CONGRATULATIONS</h2>
-            <p id="personalizedResponse"></p>
-            <img id="buddhaImage" src="buddha.png" alt="Happy Buddha" class="hidden">
-            <button id="doneButton">Done</button>
-        </div>
+        
         <div id="referral" class="hidden">
             <h3>Want to wish someone else good luck?</h3>
             <input type="text" id="referralName" placeholder="Enter their name">
             <button id="sendReferral">Send Wish</button>
         </div>
-        <div id="referralMessage" class="hidden">
-            <p id="referralText"></p>
-            <img id="referralBuddhaImage" src="buddha.png" alt="Happy Buddha" class="hidden">
+
+        <div id="buddhaContainer" class="hidden">
+          <img src="buddha.png" alt="Buddha" id="buddhaImage">
         </div>
+        
+        <div id="responseContainer" class="hidden">
+          <h2>Congratulations!</h2>
+          <p id="response"></p>
+          <button id="newWishButton">Want to wish someone else good luck?</button>
+        </div>
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
