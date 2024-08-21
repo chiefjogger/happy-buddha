@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = newPersonName.value;
         if (name) {
             response.textContent = `Vũ trụ sẽ mang tới tốt lành cho ${name}!`;
+            response.textContent = `Hãy gửi tin nhắn này cho ${name} nhé, để Vũ Trụ mang tới an lành cho mọi người!`
             newWishForm.classList.add('hidden');
         }
     });
