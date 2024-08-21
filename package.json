@@ -4,7 +4,7 @@
   "description": "A website for sending wishes and prayers",
   "main": "script.js",
   "scripts": {
-    "build": "echo \"window.ENV = { OPENAI_API_KEY: '$OPENAI_API_KEY' }\" > public/config.js"
+    "build": "mkdir -p public && echo \"window.ENV = { OPENAI_API_KEY: '$OPENAI_API_KEY' }\" > public/config.js"
   },
   "keywords": [
     "wish",
