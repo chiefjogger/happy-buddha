@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     submitWish.addEventListener('click', function() {
         const wish = wishInput.value;
         if (wish) {
-            response.textContent = "Your wish: " + wish;
+            response.textContent = "Tín hiệu từ vũ trụ: Bạn sẽ có" + wish;
             responseContainer.classList.remove('hidden');
             buddhaImage.classList.remove('hidden');
             newWishForm.classList.remove('hidden');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     newWishButton.addEventListener('click', function() {
         const name = newPersonName.value;
         if (name) {
-            response.textContent = `Good luck ${name}!`;
+            response.textContent = `Vũ trụ sẽ mang tới tốt lành cho ${name}!`;
             newWishForm.classList.add('hidden');
         }
     });
