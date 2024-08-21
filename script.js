@@ -9,8 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const newPersonName = document.getElementById('newPersonName');
     const newWishButton = document.getElementById('newWishButton');
     const testButton = document.getElementById('testOpenAIButton');
-
-    document.getElementById('testFetchWishesButton').addEventListener('click', testFetchWishes);
+    const testFetchWishesButton = document.getElementById('testFetchWishesButton');
+    if (testFetchWishesButton) {
+        testFetchWishesButton.addEventListener('click', testFetchWishes);
+    } else {
+        console.error('Test Fetch Wishes button not found');
+    }
     
     submitWish.addEventListener('click', async function() {
     const wish = wishInput.value;
