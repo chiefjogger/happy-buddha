@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "@vercel/edge-config": "latest",
-    "openai": "^3.2.1"
+    "openai": "^4.0.0"
   }
 }
