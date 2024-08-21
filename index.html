@@ -4,37 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wish & Prayer Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="logo">WishPrayer</h1>
+        <h1>WishPrayer</h1>
         <div id="wishForm">
             <textarea id="wishInput" placeholder="Enter your wish or prayer here..."></textarea>
             <button id="submitWish">Send Wish</button>
         </div>
-        
-        <div id="referral" class="hidden">
-            <h3>Want to wish someone else good luck?</h3>
-            <input type="text" id="referralName" placeholder="Enter their name">
-            <button id="sendReferral">Send Wish</button>
-        </div>
-
-        <div id="buddhaContainer" class="hidden">
-          <img src="buddha.png" alt="Buddha" id="buddhaImage">
-        </div>
-        
         <div id="responseContainer" class="hidden">
-          <h2>Congratulations!</h2>
-          <p id="response"></p>
-          <button id="newWishButton">Want to wish someone else good luck?</button>
+            <h2>Response</h2>
+            <p id="response"></p>
         </div>
-        
     </div>
-    <script src="/config.js"></script>
     <script src="script.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
 </body>
 </html>
