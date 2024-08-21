@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Buddha wish-granting website",
   "dependencies": {
-    "openai": "^3.2.1"
+    "openai": "^4.0.0"
   }
 }
