@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const wish = wishInput.value;
     if (wish) {
         try {
-            const response = await fetch('/api/get-universe-response', {
+            const response = await fetch('/api/test-openai.js', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
