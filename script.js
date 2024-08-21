@@ -4,14 +4,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitWish = document.getElementById('submitWish');
     const responseContainer = document.getElementById('responseContainer');
     const response = document.getElementById('response');
+    const buddhaImage = document.getElementById('buddhaImage');
+    const newWishForm = document.getElementById('newWishForm');
+    const newPersonName = document.getElementById('newPersonName');
+    const newWishButton = document.getElementById('newWishButton');
 
     submitWish.addEventListener('click', function() {
         const wish = wishInput.value;
         if (wish) {
-            // For now, just display the wish as the response
             response.textContent = "Your wish: " + wish;
             responseContainer.classList.remove('hidden');
+            buddhaImage.classList.remove('hidden');
+            newWishForm.classList.remove('hidden');
             wishForm.classList.add('hidden');
+        }
+    });
+
+    newWishButton.addEventListener('click', function() {
+        const name = newPersonName.value;
+        if (name) {
+            response.textContent = `Good luck ${name}!`;
+            newWishForm.classList.add('hidden');
         }
     });
 });
