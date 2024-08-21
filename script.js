@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const newWishButton = document.getElementById('newWishButton');
     const testButton = document.getElementById('testOpenAIButton');
 
+    document.getElementById('testFetchWishesButton').addEventListener('click', testFetchWishes);
+    
     submitWish.addEventListener('click', async function() {
     const wish = wishInput.value;
     if (wish) {
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     testButton.addEventListener('click', testOpenAI);
+    fetchRecentWishes();
 });
 
 async function testOpenAI() {
@@ -80,6 +83,7 @@ async function testOpenAI() {
 
 // Function to submit a wish
 function logWish(wish) {
+    console.log('Attempting to log wish:', wish);
     fetch('/api/logWish', {
         method: 'POST',
         headers: {
@@ -87,38 +91,58 @@ function logWish(wish) {
         },
         body: JSON.stringify({ wish }),
     })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Log wish response status:', response.status);
+            return response.json();
+        })
         .then(data => {
-            console.log('Wish logged:', data);
+            console.log('Wish logged successfully:', data);
             fetchRecentWishes(); // Refresh the wishes list
         })
-        .catch(error => console.error('Error logging wish:', error));
+        .catch(error => {
+            console.error('Error logging wish:', error);
+            alert('Failed to log wish. Please check the console for details.');
+        });
 }
 
 // Function to fetch and display recent wishes
 function fetchRecentWishes() {
+    console.log('Fetching recent wishes...');
     fetch('/api/getWishes')
-        .then(response => response.json())
+        .then(response => {
+            console.log('Get wishes response status:', response.status);
+            return response.json();
+        })
         .then(wishes => {
+            console.log('Retrieved wishes:', wishes);
             const tableBody = document.querySelector('#wishesTable tbody');
             tableBody.innerHTML = '';
-            wishes.forEach(wish => {
-                const row = `
-                    <tr>
-                        <td>${wish.wish}</td>
-                        <td>${new Date(wish.timestamp).toLocaleString('vi-VN')}</td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
+            if (wishes.length === 0) {
+                console.log('No wishes found');
+                tableBody.innerHTML = '<tr><td colspan="2">No wishes found</td></tr>';
+            } else {
+                wishes.forEach(wish => {
+                    const row = `
+                        <tr>
+                            <td>${wish.wish}</td>
+                            <td>${new Date(wish.timestamp).toLocaleString('vi-VN')}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
             document.getElementById('recentWishes').classList.remove('hidden');
         })
-        .catch(error => console.error('Error fetching wishes:', error));
+        .catch(error => {
+            console.error('Error fetching wishes:', error);
+            alert('Failed to fetch wishes. Please check the console for details.');
+        });
 }
 
-// Call this function when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // ... existing code ...
-
+function testFetchWishes() {
+    console.log('Manually triggering wish fetch...');
     fetchRecentWishes();
-});
+}
+
+
+
