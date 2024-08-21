@@ -10,16 +10,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const newWishButton = document.getElementById('newWishButton');
     const testButton = document.getElementById('testOpenAIButton');
 
-    submitWish.addEventListener('click', function() {
-        const wish = wishInput.value;
-        if (wish) {
-            response.textContent = "Tín hiệu từ vũ trụ: Bạn sẽ có " + wish;
+    submitWish.addEventListener('click', async function() {
+    const wish = wishInput.value;
+    if (wish) {
+        try {
+            const response = await fetch('/api/get-universe-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ wish: wish })
+            });
+
+            if (!response.ok) {
+                throw new Error('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại');
+            }
+
+            const data = await response.json();
+            response.textContent = data.result;
             responseContainer.classList.remove('hidden');
             buddhaImage.classList.remove('hidden');
             newWishForm.classList.remove('hidden');
             wishForm.classList.add('hidden');
+        } catch (error) {
+            console.error('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại:', error);
+            alert('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại');
         }
-    });
+    }
+});
 
     newWishButton.addEventListener('click', function() {
         const name = newPersonName.value;
