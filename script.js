@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const wish = wishInput.value;
     if (wish) {
         try {
-            const response = await fetch('/api/test-openai.js', {
+            const apiResponse = await fetch('/api/test-openai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ wish: wish })
             });
 
-            if (!response.ok) {
+            if (!apiResponse.ok) {
                 throw new Error('Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại');
             }
 
-            const data = await response.json();
+            const data = await apiResponse.json();
             response.textContent = data.result;
             responseContainer.classList.remove('hidden');
             buddhaImage.classList.remove('hidden');
