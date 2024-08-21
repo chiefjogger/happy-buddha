@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wishForm.classList.add('hidden');
 
             // Log the wish
-            submitWish(wish);
+            logWish(wish);
         } catch (error) {
             console.error('Full error object:', error);
             console.error('Error message:', error.message);
@@ -79,7 +79,7 @@ async function testOpenAI() {
 }
 
 // Function to submit a wish
-function submitWish(wish) {
+function logWish(wish) {
     fetch('/api/logWish', {
         method: 'POST',
         headers: {
