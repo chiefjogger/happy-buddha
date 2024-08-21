@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newWishForm = document.getElementById('newWishForm');
     const newPersonName = document.getElementById('newPersonName');
     const newWishButton = document.getElementById('newWishButton');
+    const testButton = document.getElementById('testOpenAIButton');
 
     submitWish.addEventListener('click', function() {
         const wish = wishInput.value;
@@ -24,8 +25,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = newPersonName.value;
         if (name) {
             response.textContent = `Vũ trụ sẽ mang tới tốt lành cho ${name}!`;
-            response.textContent = `Hãy gửi tin nhắn này cho ${name} nhé, để Vũ Trụ mang tới an lành cho mọi người!`
+            response.textContent += ` Hãy gửi tin nhắn này cho ${name} nhé, để Vũ Trụ mang tới an lành cho mọi người!`;
             newWishForm.classList.add('hidden');
         }
     });
+
+    testButton.addEventListener('click', testOpenAI);
 });
+
+async function testOpenAI() {
+  try {
+    const response = await fetch('/api/test-openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('API request failed');
+    }
+
+    const data = await response.json();
+    alert('OpenAI API Test Result: ' + data.result);
+  } catch (error) {
+    console.error('Error testing OpenAI:', error);
+    alert('Error testing OpenAI. Check the console for details.');
+  }
+}
