@@ -11,30 +11,26 @@
     <header>
         <img src="buddha-logo.png" alt="Buddha Logo" class="logo">
     </header>
-    <div class="hero">
-        <div class="hero-content">
-            <h1>Tín Hiệu Từ Vũ Trụ</h1>
-            <p>Khám phá những thông điệp đầy ý nghĩa từ vũ trụ dành riêng cho bạn.</p>
-            <button id="scrollToWish" class="cta-button">Gửi Điều Ước</button>
-        </div>
-    </div>
-    <div class="container">
+    <main>
+        <h1>Tín Hiệu Từ Vũ Trụ</h1>
         <div id="wishForm">
             <textarea id="wishInput" placeholder="Bạn muốn ước gì? (càng cụ thể càng tốt). Sau khi Ước, hãy chờ 20 giây để Vũ Trụ phân tích tín hiệu của bạn..."></textarea>
-            <button id="submitWish">Gửi Điều Ước</button>
-        </div>
-        <div id="responseContainer" class="hidden">
-            <h2>Phản Hồi</h2>
-            <p id="response"></p>
-            <img id="buddhaImage" src="buddha.png" alt="Buddha" class="hidden">
-            <div id="newWishForm" class="hidden">
-                <h3>Bạn muốn gửi lời chúc may mắn cho người khác?</h3>
-                <input type="text" id="newPersonName" placeholder="Nhập tên của họ">
-                <button id="newWishButton">Gửi Lời Chúc</button>
+            <div class="buttons">
+                <button id="submitWish">Gửi Điều Ước</button>
             </div>
         </div>
         <div class="testimonial">
             <p>200k+ người đã nhận được tín hiệu an lành từ Vũ Trụ</p>
+        </div>
+    </main>
+    <div id="responseContainer" class="hidden">
+        <h2>Phản Hồi</h2>
+        <p id="response"></p>
+        <img id="buddhaImage" src="buddha.png" alt="Buddha" class="hidden">
+        <div id="newWishForm" class="hidden">
+            <h3>Bạn muốn gửi lời chúc may mắn cho người khác?</h3>
+            <input type="text" id="newPersonName" placeholder="Nhập tên của họ">
+            <button id="newWishButton">Gửi Lời Chúc</button>
         </div>
     </div>
     <script src="script.js"></script>
