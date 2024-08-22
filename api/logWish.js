@@ -1,4 +1,6 @@
-import { set } from '@vercel/edge-config';
+import { createClient } from '@vercel/edge-config';
+
+const client = createClient(process.env.EDGE_CONFIG);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -9,7 +11,7 @@ export default async function handler(req, res) {
 
     try {
       const newWish = { wish, timestamp: Date.now() };
-      await set('wishes', (currentWishes) => {
+      await client.set('wishes', (currentWishes) => {
         const updatedWishes = Array.isArray(currentWishes) ? [newWish, ...currentWishes] : [newWish];
         return updatedWishes.slice(0, 10); // Keep only the 10 most recent wishes
       });
