@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@vercel/edge-config": "latest_version",
+    "@vercel/edge-config": "latest",
     "openai": "^4.0.0"
   }
 }
