@@ -22,3 +22,8 @@ catch (error) {
   console.error('Error details:', error);
   res.status(500).json({ error: 'Failed to retrieve wishes', details: error.message });
 }
+
+const { wish } = req.body;
+if (!wish) {
+  return res.status(400).json({ error: 'Wish is required' });
+}
