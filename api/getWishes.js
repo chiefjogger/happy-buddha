@@ -1,10 +1,11 @@
-import { get } from '@vercel/edge-config';
 import { createClient } from '@vercel/edge-config';
+
+const client = createClient(process.env.EDGE_CONFIG);
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
-      const wishes = await get('wishes');
+      const wishes = await client.get('wishes');
       if (!wishes) {
         return res.status(200).json([]);  // Return empty array if no wishes found
       }
