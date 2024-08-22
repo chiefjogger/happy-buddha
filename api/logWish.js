@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     try {
       const newWish = { wish, timestamp: Date.now() };
       const currentWishes = await client.get('wishes') || [];
-      const updatedWishes = [newWish, ...currentWishes].slice(0, 10); // Keep only the 10 most recent wishes
+      const updatedWishes = [newWish, ...currentWishes].slice(0, 10);
       await client.set('wishes', updatedWishes);
       
       res.status(200).json({ message: 'Wish logged successfully' });
