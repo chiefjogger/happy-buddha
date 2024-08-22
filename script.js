@@ -140,7 +140,7 @@ function fetchRecentWishes() {
             }
             document.getElementById('recentWishes').classList.remove('hidden');
         })
-         })
+        
         .catch(error => {
             console.error('Error fetching wishes:', error);
             console.error('Error details:', error.message);
