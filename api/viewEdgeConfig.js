@@ -1,11 +1,13 @@
 import { createClient } from '@vercel/edge-config';
 
+const client = createClient(process.env.EDGE_CONFIG);
+
 export default async function handler(req, res) {
-  const { key } = req.query; // Get the key from the query parameter
+  const { key = 'wishes' } = req.query; // Default to 'wishes' if no key is provided
 
   if (req.method === 'GET') {
     try {
-      const value = await get(key);
+      const value = await client.get(key);
       res.status(200).json({
         key: key,
         value: value,
