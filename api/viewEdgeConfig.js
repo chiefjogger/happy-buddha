@@ -1,3 +1,5 @@
+import { createClient } from '@vercel/edge-config';
+
 export default async function handler(req, res) {
   const { key } = req.query; // Get the key from the query parameter
 
