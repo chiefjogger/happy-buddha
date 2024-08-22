@@ -1,4 +1,5 @@
 import { get } from '@vercel/edge-config';
+import { createClient } from '@vercel/edge-config';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
