@@ -115,6 +115,9 @@ function fetchRecentWishes() {
     fetch('/api/getWishes')
         .then(response => {
             console.log('Get wishes response status:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             return response.json();
         })
         .then(wishes => {
@@ -137,8 +140,10 @@ function fetchRecentWishes() {
             }
             document.getElementById('recentWishes').classList.remove('hidden');
         })
+         })
         .catch(error => {
             console.error('Error fetching wishes:', error);
+            console.error('Error details:', error.message);
             alert('Failed to fetch wishes. Please check the console for details.');
         });
 }
