@@ -11,10 +11,10 @@ export default async function handler(req, res) {
 
     try {
       const newWish = { wish, timestamp: Date.now() };
-      await client.set('wishes', (currentWishes) => {
-        const updatedWishes = Array.isArray(currentWishes) ? [newWish, ...currentWishes] : [newWish];
-        return updatedWishes.slice(0, 10); // Keep only the 10 most recent wishes
-      });
+      const currentWishes = await client.get('wishes') || [];
+      const updatedWishes = [newWish, ...currentWishes].slice(0, 10); // Keep only the 10 most recent wishes
+      await client.set('wishes', updatedWishes);
+      
       res.status(200).json({ message: 'Wish logged successfully' });
     } catch (error) {
       console.error('Error logging wish:', error);
