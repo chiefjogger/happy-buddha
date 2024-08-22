@@ -10,14 +10,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const newWishButton = document.getElementById('newWishButton');
     const testButton = document.getElementById('testOpenAIButton');
     const testFetchWishesButton = document.getElementById('testFetchWishesButton');
+
     if (testFetchWishesButton) {
         testFetchWishesButton.addEventListener('click', testFetchWishes);
-    } else {
-        console.error('Test Fetch Wishes button not found');
     }
     
-    submitWish.addEventListener('click', async function() {
-    const wish = wishInput.value;
+    if (submitWish) {
+        submitWish.addEventListener('click', async function() {
+            // ... existing code ...
+        });
+    }
+
+    if (newWishButton) {
+        newWishButton.addEventListener('click', function() {
+            // ... existing code ...
+        });
+    }
+
+    if (testButton) {
+        testButton.addEventListener('click', testOpenAI);
+    }
+
+    fetchRecentWishes();
+});    
+        
+    const wish = wishInput.value;    
     if (wish) {
         try {
             const apiResponse = await fetch('/api/test-openai', {
