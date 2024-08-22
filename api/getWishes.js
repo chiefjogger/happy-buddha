@@ -1,25 +1,12 @@
 import { createClient } from '@vercel/edge-config';
 
-const client = createClient(process.env.EDGE_CONFIG);
-
 export default async function handler(req, res) {
-  if (req.method === 'GET') {
-    try {
-      const wishes = await client.get('wishes');
-      if (!wishes) {
-        return res.status(200).json([]);  // Return empty array if no wishes found
-      }
-      res.status(200).json(wishes);
-    } catch (error) {
-      console.error('Server error:', error);
-      res.status(500).json({ 
-        error: 'Failed to retrieve wishes', 
-        message: error.message,
-        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
-      });
-    }
-  } else {
-    res.setHeader('Allow', ['GET']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+  try {
+    const client = createClient(process.env.EDGE_CONFIG);
+    const wishes = await client.get('wishes') || [];
+    res.status(200).json(wishes);
+  } catch (error) {
+    console.error('Error fetching wishes:', error);
+    res.status(500).json({ error: 'Failed to fetch wishes' });
   }
 }
