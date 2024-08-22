@@ -114,11 +114,17 @@ function logWish(wish) {
     })
         .then(response => {
             console.log('Log wish response status:', response.status);
-            return response.json();
+            return response.text(); // Change this from response.json() to response.text()
         })
-        .then(data => {
-            console.log('Wish logged successfully:', data);
-            fetchRecentWishes(); // Refresh the wishes list
+        .then(text => {
+            try {
+                const data = JSON.parse(text);
+                console.log('Wish logged successfully:', data);
+                fetchRecentWishes(); // Refresh the wishes list
+            } catch (e) {
+                console.error('Server returned non-JSON response:', text);
+                throw new Error('Invalid JSON response from server');
+            }
         })
         .catch(error => {
             console.error('Error logging wish:', error);
