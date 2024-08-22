@@ -1,7 +1,5 @@
 import { createClient } from '@vercel/edge-config';
 
-const client = createClient(process.env.EDGE_CONFIG);
-
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { wish } = req.body;
@@ -10,11 +8,13 @@ export default async function handler(req, res) {
     }
 
     try {
-      const newWish = { wish, timestamp: Date.now() };
+      const client = createClient(process.env.EDGE_CONFIG);
       const currentWishes = await client.get('wishes') || [];
+      const newWish = { wish, timestamp: Date.now() };
       const updatedWishes = [newWish, ...currentWishes].slice(0, 10);
+
       await client.set('wishes', updatedWishes);
-      
+
       res.status(200).json({ message: 'Wish logged successfully' });
     } catch (error) {
       console.error('Error logging wish:', error);
