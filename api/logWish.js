@@ -1,29 +1,29 @@
-import { get, set } from '@vercel/edge-config';
+import { set } from '@vercel/edge-config';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { wish } = req.body;
+    if (!wish) {
+      return res.status(400).json({ error: 'Wish is required' });
+    }
+
     try {
-      const wishes = await get('wishes') || [];
-      wishes.unshift({ wish, timestamp: Date.now() });
-      if (wishes.length > 10) wishes.pop(); // Keep only the 10 most recent wishes
-      await set('wishes', wishes);
+      const newWish = { wish, timestamp: Date.now() };
+      await set('wishes', (currentWishes) => {
+        const updatedWishes = Array.isArray(currentWishes) ? [newWish, ...currentWishes] : [newWish];
+        return updatedWishes.slice(0, 10); // Keep only the 10 most recent wishes
+      });
       res.status(200).json({ message: 'Wish logged successfully' });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to log wish' });
+      console.error('Error logging wish:', error);
+      res.status(500).json({ 
+        error: 'Failed to log wish', 
+        message: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
     }
   } else {
     res.setHeader('Allow', ['POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-}
-
-catch (error) {
-  console.error('Error details:', error);
-  res.status(500).json({ error: 'Failed to retrieve wishes', details: error.message });
-}
-
-const { wish } = req.body;
-if (!wish) {
-  return res.status(400).json({ error: 'Wish is required' });
 }
