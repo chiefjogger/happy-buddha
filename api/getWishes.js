@@ -1,3 +1,3 @@
-import { getWishes } from './logWish';
+import { getWishes } from './logWish.js';
 
 export default getWishes;
