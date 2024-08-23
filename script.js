@@ -87,7 +87,7 @@ async function testOpenAI() {
 }
 
 async function handleWishSubmission() {
-    const wish = wishInput.value;    
+    const wish = wishInput.value;
     if (wish) {
         try {
             const apiResponse = await fetch('/api/test-openai', {
@@ -98,23 +98,16 @@ async function handleWishSubmission() {
                 body: JSON.stringify({ wish: wish })
             });
 
-            const responseData = await apiResponse.json();
-
             if (!apiResponse.ok) {
-                throw new Error(`API Error: ${responseData.error}. Details: ${responseData.details || 'No details provided'}`);
+                throw new Error(`HTTP error! status: ${apiResponse.status}`);
             }
 
-            response.textContent = responseData.result;
-            responseContainer.classList.remove('hidden');
-            buddhaImage.classList.remove('hidden');
-            newWishForm.classList.remove('hidden');
-            wishForm.classList.add('hidden');
+            const responseData = await apiResponse.json();
+            // Handle the response...
 
-            // Log the wish
-            await logWish(wish);
         } catch (error) {
             console.error('Error:', error);
-            alert(`An error occurred: ${error.message}`);
+            alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
         }
     }
 }
