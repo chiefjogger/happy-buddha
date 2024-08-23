@@ -87,31 +87,22 @@ async function testOpenAI() {
 }
 
 function logWish(wish) {
-    console.log('Attempting to log wish:', wish);
-    fetch('/api/logWish', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ wish }),
+  fetch('/api/logWish', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ wish }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Fetch and display updated wishes
+      fetchWishes();
     })
-        .then(response => {
-            console.log('Log wish response status:', response.status);
-            return response.text();
-        })
-        .then(text => {
-            try {
-                const data = JSON.parse(text);
-                console.log('Wish logged successfully:', data);
-            } catch (e) {
-                console.error('Server returned non-JSON response:', text);
-                throw new Error('Invalid JSON response from server');
-            }
-        })
-        .catch(error => {
-            console.error('Error logging wish:', error);
-            alert('Failed to log wish. Please check the console for details.');
-        });
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
 
 async function fetchWishes() {
