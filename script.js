@@ -127,17 +127,19 @@ async function fetchWishes() {
         console.error('Error fetching wishes:', error);
     }
 }
-// Add a function to display wishes
+
+    // Add a function to display wishes
+
 function displayWishes(wishes) {
-  const wishesTable = document.getElementById('wishesTable').getElementsByTagName('tbody')[0];
-  wishesTable.innerHTML = ''; // Clear existing wishes
-  wishes.slice(0, 10).forEach(wish => {
-    const row = wishesTable.insertRow();
-    const wishCell = row.insertCell(0);
-    const timestampCell = row.insertCell(1);
-    wishCell.textContent = wish.wish;
-    timestampCell.textContent = new Date(wish.timestamp).toLocaleString();
-  });
+    const wishesTable = document.getElementById('wishesTable').getElementsByTagName('tbody')[0];
+    wishesTable.innerHTML = ''; // Clear existing wishes
+    wishes.slice(0, 10).forEach(wish => {
+        const row = wishesTable.insertRow();
+        const wishCell = row.insertCell(0);
+        const timestampCell = row.insertCell(1);
+        wishCell.textContent = wish.wish;
+        timestampCell.textContent = new Date(wish.timestamp).toLocaleString();
+    });
 }
 
 // Call fetchWishes when the page loads
