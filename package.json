@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "openai": "^4.0.0",
+    "openai": "^gpt-4o-mini",
     "mongodb": "^5.0.0"
   }
 }
