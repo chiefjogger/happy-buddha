@@ -124,3 +124,18 @@ async function fetchWishes() {
     console.error('Error fetching wishes:', error);
   }
 }
+
+
+// Add a function to display wishes
+function displayWishes(wishes) {
+  const wishList = document.getElementById('wish-list');
+  wishList.innerHTML = ''; // Clear existing wishes
+  wishes.forEach(wish => {
+    const wishItem = document.createElement('li');
+    wishItem.textContent = `${wish.wish} (${new Date(wish.timestamp).toLocaleString()})`;
+    wishList.appendChild(wishItem);
+  });
+}
+
+// Call fetchWishes when the page loads
+document.addEventListener('DOMContentLoaded', fetchWishes);
