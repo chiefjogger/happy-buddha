@@ -110,7 +110,7 @@ async function fetchWishes() {
     const response = await fetch('/api/getWishes');
     const wishes = await response.json();
     console.log('Fetched wishes:', wishes);
-    // Handle displaying wishes here
+    displayWishes(wishes);
   } catch (error) {
     console.error('Error fetching wishes:', error);
   }
@@ -119,12 +119,14 @@ async function fetchWishes() {
 
 // Add a function to display wishes
 function displayWishes(wishes) {
-  const wishList = document.getElementById('wish-list');
-  wishList.innerHTML = ''; // Clear existing wishes
-  wishes.forEach(wish => {
-    const wishItem = document.createElement('li');
-    wishItem.textContent = `${wish.wish} (${new Date(wish.timestamp).toLocaleString()})`;
-    wishList.appendChild(wishItem);
+  const wishesTable = document.getElementById('wishesTable').getElementsByTagName('tbody')[0];
+  wishesTable.innerHTML = ''; // Clear existing wishes
+  wishes.slice(0, 10).forEach(wish => {
+    const row = wishesTable.insertRow();
+    const wishCell = row.insertCell(0);
+    const timestampCell = row.insertCell(1);
+    wishCell.textContent = wish.wish;
+    timestampCell.textContent = new Date(wish.timestamp).toLocaleString();
   });
 }
 
