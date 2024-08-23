@@ -119,29 +119,49 @@ button:hover {
 }
 
 #recentWishes {
-    margin-top: 30px;
+    margin-top: 40px;
     width: 100%;
     max-width: 600px;
 }
 
+#recentWishes h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
 #wishesTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 20px;
+    box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 #wishesTable th, #wishesTable td {
-    border: 1px solid #dfe1e5;
-    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #dfe1e5;
+    padding: 12px;
     text-align: left;
 }
 
 #wishesTable th {
     background-color: #f8f9fa;
+    font-weight: bold;
+    color: #3c4043;
+}
+
+#wishesTable tr:last-child td {
+    border-bottom: none;
 }
 
 #wishesTable tr:nth-child(even) {
     background-color: #f8f9fa;
+}
+
+#wishesTable tr:hover {
+    background-color: #e8f0fe;
 }
 
 @media (max-width: 600px) {
