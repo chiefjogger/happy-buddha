@@ -9,12 +9,11 @@ async function connectToDatabase() {
 
   const client = await MongoClient.connect(process.env.MONGODB_URI);
   const db = client.db('wishes_db');
-  const wishesCollection = db.collection('wishes');
   cachedClient = { client, db };
   return cachedClient;
 }
 
-export default async function handler(req, res) {
+export async function logWish(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -53,5 +52,15 @@ export async function getWishes(req, res) {
   } catch (error) {
     console.error('Error fetching wishes:', error);
     res.status(500).json({ error: 'Failed to fetch wishes' });
+  }
+}
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    return await logWish(req, res);
+  } else if (req.method === 'GET') {
+    return await getWishes(req, res);
+  } else {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 }
