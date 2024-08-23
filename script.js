@@ -9,25 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const newPersonName = document.getElementById('newPersonName');
     const newWishButton = document.getElementById('newWishButton');
     const testButton = document.getElementById('testOpenAIButton');
-    const header = document.querySelector('header');
-    const main = document.querySelector('main');
-
-    header.addEventListener('mouseover', () => {
-    header.style.backgroundImage = 'linear-gradient(to bottom, #6495ed, #4567b7)';
-    });
-    
-    header.addEventListener('mouseout', () => {
-      header.style.backgroundImage = 'linear-gradient(to bottom, #4567b7, #6495ed)';
-    });
-    
-    main.addEventListener('mouseover', () => {
-      main.style.transform = 'scale(1.1)';
-    });
-    
-    main.addEventListener('mouseout', () => {
-      main.style.transform = 'scale(1)';
-    });
-
     
     if (submitWish) {
         submitWish.addEventListener('click', handleWishSubmission);
