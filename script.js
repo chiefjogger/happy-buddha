@@ -113,3 +113,14 @@ function logWish(wish) {
             alert('Failed to log wish. Please check the console for details.');
         });
 }
+
+async function fetchWishes() {
+  try {
+    const response = await fetch('/api/getWishes');
+    const wishes = await response.json();
+    console.log('Fetched wishes:', wishes);
+    // Handle displaying wishes here
+  } catch (error) {
+    console.error('Error fetching wishes:', error);
+  }
+}
