@@ -29,41 +29,48 @@ document.addEventListener('DOMContentLoaded', function() {
         testButton.addEventListener('click', testOpenAI);
     }
 
-    async function handleWishSubmission() {
-        const wish = wishInput.value;    
-        if (wish) {
-            try {
-                const apiResponse = await fetch('/api/test-openai', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ wish: wish })
-                });
+   async function handleWishSubmission() {
+    const wish = wishInput.value;
+    if (wish) {
+        try {
+            console.log('Submitting wish:', wish);
+            const apiResponse = await fetch('/api/test-openai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ wish: wish })
+            });
 
-                const responseData = await apiResponse.json();
+            console.log('API response status:', apiResponse.status);
+            const responseData = await apiResponse.json();
+            console.log('API response data:', responseData);
 
-                if (!apiResponse.ok) {
-                    throw new Error(`API Error: ${responseData.error}. Details: ${responseData.details || 'No details provided'}`);
-                }
-
-                response.textContent = responseData.result;
-                responseContainer.classList.remove('hidden');
-                buddhaImage.classList.remove('hidden');
-                newWishForm.classList.remove('hidden');
-                wishForm.classList.add('hidden');
-
-                // Log the wish
-                logWish(wish);
-            } catch (error) {
-                console.error('Full error object:', error);
-                console.error('Error message:', error.message);
-                console.error('Error stack:', error.stack);
-                alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
+            if (!apiResponse.ok) {
+                throw new Error(`API Error: ${responseData.error}. Details: ${responseData.details || 'No details provided'}`);
             }
+
+            response.textContent = responseData.result;
+            responseContainer.classList.remove('hidden');
+            buddhaImage.classList.remove('hidden');
+            newWishForm.classList.remove('hidden');
+            wishForm.classList.add('hidden');
+
+            // Log the wish
+            await logWish(wish);
+            console.log('Wish logged successfully');
+
+        } catch (error) {
+            console.error('Full error object:', error);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
+            alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
         }
+    } else {
+        console.log('No wish entered');
+        alert('Vui lòng nhập điều ước của bạn.');
     }
-});
+}
 
 async function testOpenAI() {
     try {
@@ -83,32 +90,6 @@ async function testOpenAI() {
     } catch (error) {
         console.error('Error testing OpenAI:', error);
         alert('Error testing OpenAI. Check the console for details.');
-    }
-}
-
-async function handleWishSubmission() {
-    const wish = wishInput.value;
-    if (wish) {
-        try {
-            const apiResponse = await fetch('/api/test-openai', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ wish: wish })
-            });
-
-            if (!apiResponse.ok) {
-                throw new Error(`HTTP error! status: ${apiResponse.status}`);
-            }
-
-            const responseData = await apiResponse.json();
-            // Handle the response...
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
-        }
     }
 }
 
