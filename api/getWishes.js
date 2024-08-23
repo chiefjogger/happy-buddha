@@ -1,3 +1,3 @@
-import { getWishes } from './api/logWish';
+import { getWishes } from './logWish';
 
 export default getWishes;
