@@ -9,11 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const newPersonName = document.getElementById('newPersonName');
     const newWishButton = document.getElementById('newWishButton');
     const testButton = document.getElementById('testOpenAIButton');
-    const testFetchWishesButton = document.getElementById('testFetchWishesButton');
-
-    if (testFetchWishesButton) {
-        testFetchWishesButton.addEventListener('click', testFetchWishes);
-    }
     
     if (submitWish) {
         submitWish.addEventListener('click', handleWishSubmission);
@@ -33,8 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (testButton) {
         testButton.addEventListener('click', testOpenAI);
     }
-
-    fetchRecentWishes();
 
     async function handleWishSubmission() {
         const wish = wishInput.value;    
@@ -110,7 +103,6 @@ function logWish(wish) {
             try {
                 const data = JSON.parse(text);
                 console.log('Wish logged successfully:', data);
-                fetchRecentWishes();
             } catch (e) {
                 console.error('Server returned non-JSON response:', text);
                 throw new Error('Invalid JSON response from server');
@@ -120,41 +112,4 @@ function logWish(wish) {
             console.error('Error logging wish:', error);
             alert('Failed to log wish. Please check the console for details.');
         });
-}
-
-function fetchRecentWishes() {
-    console.log('Fetching recent wishes...');
-    fetch('/api/getWishes')
-        .then(response => {
-            console.log('Get wishes response status:', response.status);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(wishes => {
-            console.log('Retrieved wishes:', wishes);
-            const tableBody = document.querySelector('#wishesTable tbody');
-            tableBody.innerHTML = '';
-            if (wishes.length === 0) {
-                console.log('No wishes found');
-                tableBody.innerHTML = '<tr><td colspan="2">No wishes found</td></tr>';
-            } else {
-                wishes.forEach(wish => {
-                    const row = `
-                        <tr>
-                            <td>${wish.wish}</td>
-                            <td>${new Date(wish.timestamp).toLocaleString('vi-VN')}</td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
-                });
-            }
-            document.getElementById('recentWishes').classList.remove('hidden');
-        });
-}
-
-function testFetchWishes() {
-    console.log('Manually triggering wish fetch...');
-    fetchRecentWishes();
 }
