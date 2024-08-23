@@ -8,7 +8,8 @@ async function connectToDatabase() {
   }
 
   const client = await MongoClient.connect(process.env.MONGODB_URI);
-  const db = client.db('wishesDB');
+  const db = client.db('wishes_db');
+  const wishesCollection = db.collection('wishes');
   cachedClient = { client, db };
   return cachedClient;
 }
