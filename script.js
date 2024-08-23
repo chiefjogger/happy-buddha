@@ -86,37 +86,70 @@ async function testOpenAI() {
     }
 }
 
-function logWish(wish) {
-  fetch('/api/logWish', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ wish }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      // Fetch and display updated wishes
-      fetchWishes();
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+async function handleWishSubmission() {
+    const wish = wishInput.value;    
+    if (wish) {
+        try {
+            const apiResponse = await fetch('/api/test-openai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ wish: wish })
+            });
+
+            const responseData = await apiResponse.json();
+
+            if (!apiResponse.ok) {
+                throw new Error(`API Error: ${responseData.error}. Details: ${responseData.details || 'No details provided'}`);
+            }
+
+            response.textContent = responseData.result;
+            responseContainer.classList.remove('hidden');
+            buddhaImage.classList.remove('hidden');
+            newWishForm.classList.remove('hidden');
+            wishForm.classList.add('hidden');
+
+            // Log the wish
+            await logWish(wish);
+        } catch (error) {
+            console.error('Error:', error);
+            alert(`An error occurred: ${error.message}`);
+        }
+    }
+}
+
+async function logWish(wish) {
+    try {
+        const response = await fetch('/api/logWish', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ wish })
+        });
+        if (!response.ok) {
+            throw new Error('Failed to log wish');
+        }
+        // Fetch and display updated wishes
+        await fetchWishes();
+    } catch (error) {
+        console.error('Error logging wish:', error);
+    }
 }
 
 async function fetchWishes() {
-  try {
-    const response = await fetch('/api/getWishes');
-    const wishes = await response.json();
-    console.log('Fetched wishes:', wishes);
-    displayWishes(wishes);
-  } catch (error) {
-    console.error('Error fetching wishes:', error);
-  }
+    try {
+        const response = await fetch('/api/getWishes');
+        if (!response.ok) {
+            throw new Error('Failed to fetch wishes');
+        }
+        const wishes = await response.json();
+        displayWishes(wishes);
+    } catch (error) {
+        console.error('Error fetching wishes:', error);
+    }
 }
-
-
 // Add a function to display wishes
 function displayWishes(wishes) {
   const wishesTable = document.getElementById('wishesTable').getElementsByTagName('tbody')[0];
