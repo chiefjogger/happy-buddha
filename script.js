@@ -55,7 +55,19 @@ async function handleWishSubmission(event) {
             const responseData = await response.json();
             console.log('API response data:', responseData);
 
-            // ... rest of the function remains the same
+            
+      
+            document.getElementById('response').textContent = responseData.result;
+            document.getElementById('responseContainer').classList.remove('hidden');
+            document.getElementById('buddhaImage').classList.remove('hidden');
+
+        
+            wishInput.value = '';
+
+         
+            await fetchWishes();
+            
+            
         } catch (error) {
             console.error('Full error object:', error);
             console.error('Error message:', error.message);
