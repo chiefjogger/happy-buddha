@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tín Hiệu Từ Vũ Trụ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Wish Logger</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="buddha-logo.png" alt="Buddha Logo" class="logo">
-    </header>
-    <main>
-        <h1>Tín Hiệu Từ Vũ Trụ</h1>
-        <div id="wishForm">
-            <textarea id="wishInput" placeholder="Bạn muốn ước gì? (càng cụ thể càng tốt). Sau khi Ước, hãy chờ 20 giây để Vũ Trụ phân tích tín hiệu của bạn..."></textarea>
-            <div class="buttons">
-                <button id="submitWish">Gửi Điều Ước</button>
-            </div>
-        </div>
-        <div class="testimonial">
-            <p>200k+ người đã nhận được tín hiệu an lành từ Vũ Trụ</p>
-        </div>
-        
-        <div id="responseContainer" class="hidden">
-            <h2>Phản Hồi</h2>
-            <p id="response"></p>
-            <img id="buddhaImage" src="buddha.png" alt="Buddha" class="hidden">
-            <div id="newWishForm" class="hidden">
-                <h3>Bạn muốn gửi lời chúc may mắn cho người khác?</h3>
-                <input type="text" id="newPersonName" placeholder="Nhập tên của họ">
-                <button id="newWishButton">Gửi Lời Chúc</button>
-            </div>
-        </div>
-        
-        <div id="wishListContainer">
-            <h2>Những Điều Ước Gần Đây</h2>
-            <ul id="wish-list"></ul>
-        </div>
-    </main>
-    
+    <h1>Wish Logger</h1>
+    <form id="wishForm">
+        <input type="text" id="wishInput" placeholder="Enter your wish" required>
+        <button type="submit">Submit Wish</button>
+    </form>
+
+    <h2>Recent Wishes</h2>
+    <table id="wishesTable">
+        <thead>
+            <tr>
+                <th>Wish</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Wishes will be dynamically inserted here -->
+        </tbody>
+    </table>
+
     <script src="script.js"></script>
 </body>
 </html>
