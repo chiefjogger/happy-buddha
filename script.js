@@ -28,13 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (testButton) {
         testButton.addEventListener('click', testOpenAI);
     }
+    fetchWishes();
 
-async function handleWishSubmission() {
+async function handleWishSubmission(event) {
+    event.preventDefault();
     const wish = wishInput.value;
     if (wish) {
         try {
             console.log('Submitting wish:', wish);
-            const apiResponse = await fetch('/api/test-openai', {
+            await logWish(wish);
+            const response = await fetch('/api/test-openai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,15 +45,14 @@ async function handleWishSubmission() {
                 body: JSON.stringify({ wish: wish })
             });
 
-            console.log('API response status:', apiResponse.status);
-            console.log('API response headers:', apiResponse.headers);
+            console.log('API response status:', response.status);
+            console.log('API response headers:', response.headers);
             
-            if (!apiResponse.ok) {
-                const errorText = await apiResponse.text();
-                throw new Error(`API Error: ${apiResponse.status} ${apiResponse.statusText}. Details: ${errorText}`);
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status} ${response.statusText}`);
             }
 
-            const responseData = await apiResponse.json();
+            const responseData = await response.json();
             console.log('API response data:', responseData);
 
             // ... rest of the function remains the same
@@ -99,7 +101,6 @@ async function logWish(wish) {
         if (!response.ok) {
             throw new Error('Failed to log wish');
         }
-        // Fetch and display updated wishes
         await fetchWishes();
     } catch (error) {
         console.error('Error logging wish:', error);
@@ -133,5 +134,4 @@ function displayWishes(wishes) {
     });
 }
 
-    fetchWishes();
 }); 
