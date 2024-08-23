@@ -142,5 +142,5 @@ function displayWishes(wishes) {
     });
 }
 
-// Call fetchWishes when the page loads
-document.addEventListener('DOMContentLoaded', fetchWishes);
+    fetchWishes();
+}); 
