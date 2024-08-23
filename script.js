@@ -60,15 +60,18 @@ document.addEventListener('DOMContentLoaded', function() {
             await logWish(wish);
             console.log('Wish logged successfully');
 
+            // Fetch and display updated wishes
+            await fetchWishes();
+
         } catch (error) {
             console.error('Full error object:', error);
             console.error('Error message:', error.message);
             console.error('Error stack:', error.stack);
-            alert(`Vũ Trụ chưa nhận được tín hiệu API của bạn, hãy thử lại. Error: ${error.message}`);
+            alert(`An error occurred while processing your wish. Please try again. Error: ${error.message}`);
         }
     } else {
         console.log('No wish entered');
-        alert('Vui lòng nhập điều ước của bạn.');
+        alert('Please enter your wish.');
     }
 }
 
