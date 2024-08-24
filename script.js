@@ -136,7 +136,7 @@ async function fetchWishes() {
 
 function displayWishes(wishes) {
     const wishesTable = document.getElementById('wishesTable').getElementsByTagName('tbody')[0];
-    wishesTable.innerHTML = ''; // Clear existing wishes
+    wishesTable.innerHTML = ''; // Clear existing wishes now
     wishes.slice(0, 10).forEach(wish => {
         const row = wishesTable.insertRow();
         const wishCell = row.insertCell(0);
