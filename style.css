@@ -5,21 +5,35 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #e6f3ff; /* Pastel blue background */
+    background-color: #f5f5f7; /* Light gray background similar to Apple's */
     color: #333;
+    transition: background-color 0.3s ease;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 header {
     width: 100%;
     text-align: center;
     padding: 20px 0;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
     box-shadow: 0 1px 6px rgba(32,33,36,0.28);
 }
 
 .logo {
     max-width: 150px;
     height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 main {
@@ -30,17 +44,25 @@ main {
     width: 100%;
     max-width: 600px;
     margin-top: 50px;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    color: #1a73e8; /* Google blue */
+    color: #000; /* Apple typically uses black for headings */
     font-size: 30px;
     margin-bottom: 25px;
-    font-weight: normal;
+    font-weight: 600; /* Slightly bolder */
+    letter-spacing: -0.5px; /* Tighter letter spacing */
 }
 
 #wishForm {
@@ -54,10 +76,17 @@ textarea {
     margin-bottom: 10px;
     box-sizing: border-box;
     border: 1px solid #dfe1e5;
-    border-radius: 24px;
+    border-radius: 10px; /* Slightly rounded corners */
     font-size: 16px;
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
     resize: none;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #0071e3; /* Apple's blue */
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3);
 }
 
 .buttons {
@@ -67,9 +96,9 @@ textarea {
 }
 
 button {
-    background-color: #1a73e8; /* Google blue */
+    background-color: #0071e3; /* Apple's blue */
     border: none;
-    border-radius: 4px;
+    border-radius: 20px; /* Pill-shaped buttons */
     color: #ffffff;
     font-size: 14px;
     margin: 11px 4px;
@@ -80,11 +109,14 @@ button {
     text-align: center;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 button:hover {
-    background-color: #1765cc; /* Darker blue on hover */
+    background-color: #0077ED; /* Slightly lighter blue on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial {
@@ -108,6 +140,12 @@ button:hover {
     margin: 30px 0;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#buddhaImage:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 #newWishForm {
@@ -119,18 +157,32 @@ button:hover {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #dfe1e5;
-    border-radius: 24px;
+    border-radius: 10px; /* Slightly rounded corners */
     font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#newPersonName:focus {
+    outline: none;
+    border-color: #0071e3; /* Apple's blue */
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3);
 }
 
 #recentWishes {
     margin-top: 40px;
     width: 100%;
     max-width: 600px;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+#recentWishes:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 #recentWishes h2 {
@@ -148,6 +200,7 @@ button:hover {
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
     border-radius: 8px;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 #wishesTable th, #wishesTable td {
@@ -171,6 +224,10 @@ button:hover {
     background-color: #f8f9fa;
 }
 
+#wishesTable tr {
+    transition: background-color 0.3s ease;
+}
+
 #wishesTable tr:hover {
     background-color: #e8f0fe;
 }
@@ -179,5 +236,10 @@ button:hover {
     main, #recentWishes {
         width: 95%;
         padding: 20px;
+        backdrop-filter: none; /* Remove blur effect on mobile for better performance */
     }
+}
+
+html {
+    scroll-behavior: smooth;
 }
